@@ -20,17 +20,22 @@
       'track': '_scroll' 
     },
 
-    ready: function() {
-      this.setScrollDirection('y');
-    },
-
     _affectScroll: function(dx) {
-      console.log(dx);
+      this.scrollLeft += dx;
     },
 
     _scroll: function(e, detail) {
-      var ddx = (detail && -detail.ddx) || 0;
-      this._affectScroll(ddx);
+      if (this.disableDrag) {
+        return;
+      }
+      switch (detail.state) {
+        case 'start':
+          this._setDragging(true);
+          break;
+        case 'end':
+          this._setDragging(false);
+      }
+      this._affectScroll((detail && -detail.ddx) || 0);
     }
   };
 
