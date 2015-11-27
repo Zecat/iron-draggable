@@ -1,0 +1,37 @@
+<script>
+
+  window.Zecat = window.Zecat || {};
+
+  Zecat.IronDraggableBehavior = {
+    properties: {
+      disableDrag: {
+        type: Boolean,
+        value: false
+      },
+      dragging: {
+        type: Boolean,
+        value: false,
+        readOnly: true,
+        notify: true
+      },
+    },
+
+    listeners: {
+      'track': '_scroll' 
+    },
+
+    ready: function() {
+      this.setScrollDirection('y');
+    },
+
+    _affectScroll: function(dx) {
+      console.log(dx);
+    },
+
+    _scroll: function(e, detail) {
+      var ddx = (detail && -detail.ddx) || 0;
+      this._affectScroll(ddx);
+    }
+  };
+
+</script>
