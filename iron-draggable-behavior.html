@@ -17,7 +17,7 @@
     },
 
     listeners: {
-      'track': '_scroll' 
+      'track': '_scroll'
     },
 
     _affectScroll: function(dx) {
@@ -30,9 +30,11 @@
       }
       switch (detail.state) {
         case 'start':
+          this.fire('track-start');
           this._setDragging(true);
           break;
         case 'end':
+          this.fire('track-end');
           this._setDragging(false);
       }
       this._affectScroll((detail && -detail.ddx) || 0);
